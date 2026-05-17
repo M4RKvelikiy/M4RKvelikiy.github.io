@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Резюме — Шедько Марк Антонович</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --surface: #ffffff;
+      --text: #111827;
+      --text-secondary: #4b5563;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --border: #e5e7eb;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-hover: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --radius: 14px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --primary: #3b82f6;
+      --primary-soft: #1e3a8a;
+      --border: #334155;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -1px rgba(0,0,0,0.3);
+      --shadow-hover: 0 10px 15px -3px rgba(0,0,0,0.4), 0 4px 6px -2px rgba(0,0,0,0.3);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed; top: 1.2rem; right: 1.2rem; z-index: 100;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border);
+      box-shadow: var(--shadow); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text); font-size: 1.2rem; transition: all var(--transition);
+    }
+    .theme-toggle:hover { transform: scale(1.05); }
+
+    /* Hero */
+    .hero {
+      display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;
+      margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+    }
+    .avatar {
+      width: 130px; height: 130px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #8b5cf6);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 3.5rem; font-weight: 700;
+      box-shadow: var(--shadow); flex-shrink: 0;
+    }
+    .hero-content h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; margin-bottom: 0.4rem; }
+    .hero-role { color: var(--primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 0.8rem; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 1.2rem; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.2rem; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.1rem; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); text-decoration: none; font-weight: 500;
+      transition: all var(--transition); cursor: pointer;
+    }
+    .btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .btn i { font-size: 1rem; }
+
+    /* Sections */
+    section { margin-bottom: 2.5rem; opacity: 0; transform: translateY(15px); transition: all 0.5s ease; }
+    section.visible { opacity: 1; transform: translateY(0); }
+    .section-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+    .section-title i { color: var(--primary); }
+    .card {
+      background: var(--surface); border-radius: var(--radius); padding: 1.5rem;
+      box-shadow: var(--shadow); border: 1px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--primary); opacity:0.25; border-radius:2px; }
+    .timeline-item { position: relative; margin-bottom: 1.5rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before {
+      content:''; position:absolute; left:-1.55rem; top:0.4rem;
+      width:12px; height:12px; background:var(--primary); border-radius:50%;
+      border:2px solid var(--surface); box-shadow: 0 0 0 2px var(--primary);
+    }
+    .t-date { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 0.2rem; }
+    .t-title { font-weight: 700; font-size: 1.1rem; }
+    .t-company { color: var(--primary); font-size: 0.95rem; margin: 0.2rem 0; }
+    .t-list { margin-top: 0.5rem; padding-left: 1.2rem; color: var(--text-secondary); }
+    .t-list li { margin-bottom: 0.3rem; }
+
+    /* Skills */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+    .skill-tag {
+      background: var(--primary-soft); color: var(--primary);
+      padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.9rem; font-weight: 500;
+      transition: all var(--transition); cursor: default; border: 1px solid transparent;
+    }
+    .skill-tag:hover { background: var(--primary); color: white; transform: scale(1.05); box-shadow: var(--shadow); }
+
+    /* Expandable */
+    .expandable { margin-top: 1rem; }
+    .expand-btn {
+      background: none; border: none; color: var(--primary); cursor: pointer;
+      font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: color var(--transition);
+    }
+    .expand-btn:hover { opacity: 0.8; }
+    .expand-btn i { transition: transform 0.3s ease; }
+    .expand-btn.active i { transform: rotate(180deg); }
+    .expand-content {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0; margin-top: 0; color: var(--text-secondary);
+    }
+    .expand-content.open { max-height: 500px; opacity: 1; margin-top: 0.8rem; }
+
+    /* Grid Info */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .info-box { padding: 1rem; background: var(--bg); border-radius: 10px; border: 1px solid var(--border); }
+    .info-box h3 { font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-secondary); }
+    .info-box ul { padding-left: 1.2rem; }
+    .info-box li { margin-bottom: 0.3rem; }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 2rem 0 1rem; color: var(--text-secondary);
+      border-top: 1px solid var(--border); margin-top: 3rem; font-size: 0.9rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .hero { flex-direction: column; align-items: flex-start; text-align: left; }
+      .avatar { width: 100px; height: 100px; font-size: 2.5rem; }
+      .hero-actions { width: 100%; }
+      .btn { flex: 1; justify-content: center; }
+      .container { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <div class="container">
+    <!-- Hero -->
+    <header class="hero">
+      <div class="avatar">МШ</div>
+      <div class="hero-content">
+        <h1>Шедько Марк Антонович</h1>
+        <div class="hero-role">Инженер-наладчик / Технолог</div>
+        <div class="hero-meta">
+          <span><i class="fas fa-map-marker-alt"></i> Москва, м. Студенческая</span>
+          <span><i class="fas fa-birthday-cake"></i> 20 лет (18.03.2005)</span>
+          <span><i class="fas fa-briefcase"></i> Частичная занятость, гибкий график</span>
+        </div>
+        <div class="hero-actions">
+          <a href="tel:+79500573410" class="btn"><i class="fas fa-phone"></i> +7(950) 057-34-10</a>
+          <a href="https://t.me/m4rkchick" target="_blank" class="btn"><i class="fab fa-telegram-plane"></i> Telegram</a>
+          <a href="mailto:mark.shedko@gmail.com" class="btn"><i class="fas fa-envelope"></i> Email</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- About -->
+    <section>
+      <h2 class="section-title"><i class="fas fa-user"></i> Обо мне</h2>
+      <div class="card">
+        <p>Студент 3-го курса МГТУ «СТАНКИН» по направлению «Автоматизация технологических процессов и производств». Готов работать от 20 часов в неделю. Обсуждаю индивидуальный график согласно учебному расписанию. Трудолюбив, ответственен, нацелен на постоянное развитие навыков как в учёбе, так и в профессиональной деятельности.</p>
+        <div class="expandable">
+          <button class="expand-btn" onclick="toggleExpand(this)">Подробнее о летнем опыте <i class="fas fa-chevron-down"></i></button>
+          <div class="expand-content">
+            <p>С 16 лет работаю в летний период. Последним летом занимал должность инженера-технолога в ООО «СНД». Работал с конструкторской и технологической документацией на деревянные фермы: чтение и анализ чертежей, контроль деталей, сборка на прессовом оборудовании, контроль качества. Часто отрабатывал смены по 11 часов. Всегда ответственно подходил к задаче: самостоятельно исправлял брак, строго соблюдал технические нормы и стандарты. В скором времени получу водительские права категории B.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2 class="section-title"><i class="fas fa-briefcase"></i> Опыт работы</h2>
+      <div class="card">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="t-date">Июль 2025 — Август 2025 (2 месяца)</div>
+            <div class="t-title">Инженер-технолог</div>
+            <div class="t-company">ООО СНД</div>
+            <ul class="t-list">
+              <li>Чтение и понимание конструкторских чертежей</li>
+              <li>Подготовка и контроль комплекта деталей перед сборкой</li>
+              <li>Сборка деревянных ферм на прессовом оборудовании</li>
+              <li>Соблюдение технических требований и нормативной документации</li>
+              <li>Контроль качества готовой продукции</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Образование</h2>
+      <div class="card">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="t-date">2023 — 2027 (ожидаемый выпуск)</div>
+            <div class="t-title">Московский государственный технологический университет «СТАНКИН»</div>
+            <div class="t-company">ИЦИС, Автоматизация технологических процессов и производств</div>
+            <div style="margin-top:0.4rem; color:var(--text-secondary); font-size:0.9rem;">Неоконченное высшее • 3 курс • Гражданство: РФ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2 class="section-title"><i class="fas fa-code"></i> Навыки</h2>
+      <div class="card">
+        <div class="skills-grid">
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Data Science</span>
+          <span class="skill-tag">CODESYS</span>
+          <span class="skill-tag">Компас-3D</span>
+          <span class="skill-tag">Чтение чертежей</span>
+          <span class="skill-tag">Проектная документация</span>
+          <span class="skill-tag">ТАУ</span>
+          <span class="skill-tag">АСТУ</span>
+          <span class="skill-tag">Электротехника</span>
+          <span class="skill-tag">Чтение чужого кода</span>
+          <span class="skill-tag">Английский язык</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional -->
+    <section>
+      <h2 class="section-title"><i class="fas fa-info-circle"></i> Дополнительно</h2>
+      <div class="info-grid">
+        <div class="info-box">
+          <h3><i class="fas fa-language" style="color:var(--primary); margin-right:0.5rem;"></i>Языки</h3>
+          <ul><li>Русский — Родной</li></ul>
+        </div>
+        <div class="info-box">
+          <h3><i class="fas fa-clock" style="color:var(--primary); margin-right:0.5rem;"></i>Условия работы</h3>
+          <ul>
+            <li>Частичная занятость (от 20 ч/нед)</li>
+            <li>Гибкий график</li>
+            <li>Не готов к переезду и командировкам</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Шедько Марк Антонович</p>
+      <p style="margin-top:0.4rem; font-size:0.8rem; opacity:0.7;">Резюме обновлено: 10 октября 2025 • Сгенерировано на основе предоставленных данных</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme Toggle
+    const themeBtn = document.getElementById('themeToggle');
+    const icon = themeBtn.querySelector('i');
+    let isDark = localStorage.getItem('theme') === 'dark' || 
+                 (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    function applyTheme(dark) {
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      icon.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      isDark = dark;
+    }
+    applyTheme(isDark);
+    themeBtn.addEventListener('click', () => applyTheme(!isDark));
+
+    // Expandable
+    function toggleExpand(btn) {
+      const content = btn.nextElementSibling;
+      btn.classList.toggle('active');
+      content.classList.toggle('open');
+    }
+
+    // Scroll Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+  </script>
+</body>
+</html>
