@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Резюме - Марк Шедько</title>
+
+<style>
+    body{
+        margin:0;
+        padding:0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #dbeafe, #f5f3ff);
+        transition: 0.5s;
+    }
+
+    .container{
+        width: 80%;
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    h1{
+        text-align: center;
+        color: #2563eb;
+        font-size: 40px;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .photo{
+        display: block;
+        width: 180px;
+        margin: 20px auto;
+        border-radius: 15px;
+        border: 4px solid #2563eb;
+    }
+
+    .info{
+        font-size: 20px;
+        color: #333;
+        border: 2px solid #2563eb;
+        padding: 15px;
+        border-radius: 12px;
+        margin-top: 20px;
+        transition: 0.3s;
+    }
+
+    .info:hover{
+        background: #eff6ff;
+        color: #1d4ed8;
+    }
+
+    ul{
+        font-size: 18px;
+    }
+
+    li{
+        margin: 10px 0;
+    }
+
+    input{
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 2px solid #2563eb;
+        font-size: 16px;
+    }
+
+    button{
+        margin-top: 15px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover{
+        background: #1d4ed8;
+        transform: scale(1.05);
+    }
+
+    .buttons{
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Марк Шедько</h1>
+
+    <img class="photo" src="https://stankin.ru/bitrix/templates/stankin/images/stankin-logo-main-color-ru-rgb!-01.png" alt="Логотип МГТУ СТАНКИН">
+
+    <div class="info">
+        <p><b>Направление:</b> Автоматизация технологических процессов и производств</p>
+        <p><b>Возраст:</b> 20 лет</p>
+        <p><b>Город:</b> Москва</p>
+    </div>
+
+    <div class="info">
+        <h2>Навыки</h2>
+        <ul>
+            <li>HTML и CSS</li>
+            <li>JavaScript</li>
+            <li>Работа с ЧПУ</li>
+            <li>Основы Python</li>
+        </ul>
+    </div>
+
+    <div class="info">
+        <h2>Изменение фамилии</h2>
+
+        <input type="text" id="surnameInput" placeholder="Введите новую фамилию">
+
+        <div class="buttons">
+            <button onclick="changeSurname()">Изменить фамилию</button>
+            <button onclick="changeBackground()">Сменить фон</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeSurname(){
+        let surname = document.getElementById("surnameInput").value;
+
+        if(surname !== ""){
+            document.querySelector("h1").innerText = "Марк " + surname;
+        }
+    }
+
+    function changeBackground(){
+        let colors = ["#dbeafe", "#fce7f3", "#dcfce7", "#fef3c7", "#ede9fe"];
+        let randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        document.body.style.background = randomColor;
+    }
+</script>
+
+</body>
+</html>
